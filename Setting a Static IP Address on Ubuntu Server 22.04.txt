@@ -1,0 +1,28 @@
+-cd /etc/netplan/
+-sudo nano /etc/netplan/00-installer-config.yaml
+-network:
+  renderer: networkd
+  ethernets:
+    eth0:
+      addresses:
+        - 192.168.10.5/24
+      nameservers:
+        addresses: [1.1.1.1,8.8.8.8]
+      routes:
+        - to: default
+          via: 192.168.1.1
+  version: 2
+=====Save=========
+-sudo netplan apply
+-ip addr show eth0
+========Note=====
++[eth0]: is the name of my network interface - yours may differ.
++Under [addresses:] is the static IP to set, you’ll need to use CIDR notation, so [/24] is [255.255.255.0.]
++DNS servers are configured under [nameservers:] multiple servers should be command separated.
++The default gateway is set under [routes:] and [- to: default.]
+Save the file with CTRL + O and press enter to overwrite the existing file.
+Exit with CTRL + X
+============
+
+
+
